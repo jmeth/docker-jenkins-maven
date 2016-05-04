@@ -1,12 +1,14 @@
-FROM java:8-jre-alpine
+FROM java:jdk-alpine
 MAINTAINER jmeth <jmeth@users.noreply.github.com>
 
 RUN mkdir /usr/share/jenkins && \
     wget -O /usr/share/jenkins/jenkins.war http://mirrors.jenkins-ci.org/war/latest/jenkins.war
 
-RUN apk update && apk add fontconfig ttf-dejavu git
+RUN apk update && \
+    apk add fontconfig ttf-dejavu git bash openssh && \
+    rm -rf /var/cache/apk/*
 
-RUN MAVEN_VERSION=3.3.3 \
+RUN MAVEN_VERSION=3.3.9 \
  && cd /usr/share \
  && wget http://archive.apache.org/dist/maven/maven-3/$MAVEN_VERSION/binaries/apache-maven-$MAVEN_VERSION-bin.tar.gz -O - | tar xzf - \
  && mv /usr/share/apache-maven-$MAVEN_VERSION /usr/share/maven \
