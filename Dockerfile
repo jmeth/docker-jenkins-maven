@@ -5,10 +5,11 @@ MAINTAINER jmeth <jmeth@users.noreply.github.com>
 RUN mkdir /usr/share/jenkins && \
     wget -O /usr/share/jenkins/jenkins.war http://mirrors.jenkins-ci.org/war/latest/jenkins.war
 
-## Update, install applications, remove APK cache
+# Update, install applications, remove APK cache, add xterm for nano
 RUN apk update && \
     apk add fontconfig ttf-dejavu git bash openssh nano && \
-    rm -rf /var/cache/apk/*
+    rm -rf /var/cache/apk/* && \
+    export TERM=xterm
 
 # Install sonar-scanner to /dev/share/sonar-scanner-2.6. backup sonar-runner. rename scanenr to runn
 RUN cd /usr/share && \
@@ -18,7 +19,7 @@ RUN cd /usr/share && \
     mv sonar-scanner-2.6/bin/sonar-runner sonar-scanner-2.6/bin/sonar-runner.bak && \
     cp sonar-scanner-2.6/bin/sonar-scanner sonar-scanner-2.6/bin/sonar-runner
 
-# 
+# Install Maven 3.3.9
 RUN MAVEN_VERSION=3.3.9 \
  && cd /usr/share \
  && wget http://archive.apache.org/dist/maven/maven-3/$MAVEN_VERSION/binaries/apache-maven-$MAVEN_VERSION-bin.tar.gz -O - | tar xzf - \
