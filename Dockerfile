@@ -11,7 +11,7 @@ RUN apk update && \
     rm -rf /var/cache/apk/*
 
 # Install sonar-scanner to /dev/share/sonar-scanner-2.6. backup sonar-runner. rename scanenr to runn
-RUN cd /user/share && \
+RUN cd /usr/share && \
     wget https://sonarsource.bintray.com/Distribution/sonar-scanner-cli/sonar-scanner-2.6.zip && \
     unzip sonar-scanner-2.6.zip && \
     rm sonar-scanner-2.6.zip && \
