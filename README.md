@@ -32,4 +32,12 @@ docker run --name jenkins -p 8080:8080 -p 50000:50000 -v /var/jenkins_home jmeth
 
 Then myjenkins container has the volume (please do read about docker volume handling to find out more).
 
+
+Link with [Docker Official Sonarqube](https://hub.docker.com/_/sonarqube/) 
+
+```
+docker run --name jenkins -p 8080:8080 -p 50000:50000 -v /var/jenkins_home --link sonarqube:sonarqube jmeth/jenkins-mvn
+```
+
+
 See the [Docker Official Jenkins](https://hub.docker.com/_/jenkins/) for more info.
